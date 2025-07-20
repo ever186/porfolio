@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Mí - Portafolio</title>
+    <link rel="stylesheet" href="style_aboutme.css">
+</head>
+<body>
+
+    <div class="terminal">
+        <div class="terminal-header">
+            <div class="button red"></div>
+            <div class="button yellow"></div>
+            <div class="button green"></div>
+        </div>
+
+        <nav class="navbar">
+            <a href="index.html">./..</a>
+            <a href="aboutme.html" class="active">./aboutme.html</a>
+            <a href="skills.html">./skills.css</a>
+            <a href="project.html">./projects.py</a>
+            <a href="contact.html">./contact.txt</a>
+        </nav>
+
+        <div class="content">
+            <h3>cat about_me.txt</h3>
+            <div class = "aboutme">   
+                <img src="img/perfil.png" alt="Foto de Ever Junior Leiva Arias" class="profile-img">
+                <div class="aboutme_text">
+                    <div class="typing-container">
+                        <span class="typed-text" id="typed-text"></span>
+                        <span class="cursor" id="cursor"></span>
+                    </div>
+                    <p>
+                        His portfolio is a small reflection of my work and skills. If you want to know more or collaborate on a project, feel free to check my <a href="#">projects</a> or <a href="#">contact me</a>.
+                    </p>
+                </div>
+            </div>
+            <h3><a href="data/n_CV_Ever_Leiva.pdf" download="CV.pdf">sudo apt install cv.pdf</a></h3>
+        </div>
+    </div>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+            const typedTextElement = document.getElementById('typed-text');
+            const cursorElement = document.getElementById('cursor');
+
+            const fullText = "Electronic Engineer passionate about innovation, cybersecurity and data analysis, with specialization in industrial instrumentation and more than 18 months of experience in advanced control systems.\n\nI am proficient in maintenance management, database management and multidisciplinary team leadership, combining a strong technical background with a modern and strategic approach.\n\nI am driven by solving complex problems and transforming industrial environments through technology. Every project is an opportunity to optimize processes, exceed expectations and continue to grow professionally.";
+            
+            let currentIndex = 0;
+            let currentText = '';
+
+            function typeWriter() {
+                if (currentIndex < fullText.length) {
+                    const char = fullText.charAt(currentIndex);
+                    currentText += char;
+                    
+                    // Reemplazar \n con saltos de línea reales
+                    const displayText = currentText.replace(/\n/g, '\n');
+                    typedTextElement.textContent = displayText;
+                    
+                    currentIndex++;
+                    
+                    // Velocidad variable para hacer más natural
+                    let speed = Math.random() * 50 + 30;
+                    if (char === '.' || char === ',' || char === ';') {
+                        speed += 200; // Pausa más larga después de puntuación
+                    } else if (char === '\n') {
+                        speed += 100; // Pausa después de salto de línea
+                    } else if (char === ' ') {
+                        speed += 20; // Pausa pequeña después de espacios
+                    }
+                    
+                    setTimeout(typeWriter, speed);
+                } else {
+                    // Animación de cursor parpadeante al final
+                    cursorElement.style.animation = 'blink 1s step-end infinite';
+                }
+            }
+
+            // Iniciar el efecto después de una pequeña pausa
+            setTimeout(typeWriter, 1000);
+        });
+    </script>
+</body>
+</html>

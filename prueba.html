@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio - Ever Junior Leiva Arias</title>
+    <style>
+        /* --- ESTILOS CSS --- */
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+
+        :root {
+            --background-color: #0d1117;
+            --terminal-color: #161b22;
+            --text-color: #c9d1d9;
+            --command-color: #58a6ff;
+            --output-color: #39d353;
+            --font-family: 'Fira Code', monospace;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .terminal {
+            width: 90%;
+            max-width: 700px;
+            background-color: var(--terminal-color);
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            padding: 25px;
+            font-size: 1.1em;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #30363d;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .red { background-color: #ff5f56; }
+        .yellow { background-color: #ffbd2e; }
+        .green { background-color: #27c93f; }
+
+        .line {
+            display: flex;
+            align-items: center;
+            white-space: pre-wrap; /* Permite que el texto se ajuste si es necesario */
+        }
+
+        .prompt {
+            color: var(--command-color);
+            font-weight: bold;
+        }
+
+        .prompt span {
+            color: var(--text-color);
+            font-weight: normal;
+        }
+
+        .command {
+            margin-left: 8px;
+        }
+
+        /* Animación del cursor que parpadea */
+        .cursor {
+            display: inline-block;
+            background-color: var(--text-color);
+            width: 10px;
+            height: 1.2em;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            from, to { background-color: transparent; }
+            50% { background-color: var(--text-color); }
+        }
+
+        /* La línea de salida está oculta al principio */
+        .output {
+            margin-top: 15px;
+            color: var(--output-color);
+            opacity: 0; /* Empieza invisible */
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        /* Clase para hacer visible la salida */
+        .visible {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="terminal">
+        <div class="terminal-header">
+            <div class="button red"></div>
+            <div class="button yellow"></div>
+            <div class="button green"></div>
+        </div>
+        <div class="line">
+            <div class="prompt">root@portfolio:<span>~$&nbsp;</span></div>
+            <div id="command" class="command"></div>
+            <div id="cursor" class="cursor"></div>
+        </div>
+        <div id="output" class="output">
+            Ever Junior Leiva Arias
+        </div>
+    </div>
+
+    <script>
+        // --- LÓGICA JAVASCRIPT ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const commandElement = document.getElementById('command');
+            const cursorElement = document.getElementById('cursor');
+            const outputElement = document.getElementById('output');
+            
+            const commandText = "whoami";
+            let index = 0;
+
+            function typeCommand() {
+                // Si aún no se ha escrito todo el comando
+                if (index < commandText.length) {
+                    commandElement.textContent += commandText.charAt(index);
+                    index++;
+                    // Llama a la función de nuevo después de un retardo aleatorio para un efecto más natural
+                    setTimeout(typeCommand, Math.random() * 150 + 50);
+                } else {
+                    // Cuando el comando está completo, el cursor parpadea un par de veces
+                    cursorElement.style.animation = 'blink 1s step-end infinite';
+                    
+                    // Espera 1.5 segundos antes de mostrar el resultado
+                    setTimeout(showOutput, 1500);
+                }
+            }
+
+            function showOutput() {
+                // Muestra el nombre y añade la clase para la animación de opacidad
+                outputElement.classList.add('visible');
+            }
+
+            // Inicia la animación de escritura
+            typeCommand();
+        });
+    </script>
+
+</body>
+</html>

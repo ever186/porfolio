@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Mí - Portafolio</title>
+    <link rel="stylesheet" href="style_skills.css">
+</head>
+<body>
+
+    <div class="terminal">
+        <div class="terminal-header">
+            <div class="button red"></div>
+            <div class="button yellow"></div>
+            <div class="button green"></div>
+        </div>
+
+        <nav class="navbar">
+            <a href="index.html">./..</a>
+            <a href="aboutme.html">./aboutme.html</a>
+            <a href="skills.html" class="active">./skills.css</a>
+            <a href="project.html">./projects.py</a>
+            <a href="contact.html">./contact.txt</a>
+        </nav>
+
+    <div class="content">
+        <h3>cat skills.css</h3>
+        <div class="photo_skills">
+            <!-- Lado izquierdo - área de visualización -->
+            <div class="image_display">
+                <div class="preview_image" id="previewImage"></div>
+            </div>
+            
+            <!-- Lado derecho - iconos de skills -->
+            <div class="skills_container">
+                <div class="iconos_skills">
+                    <h4>Tools</h4>
+                    <img src="icons/icono_html.webp" alt="HTML" onmouseover="showImage('img/html.jpeg')" onmouseout="hideImage()">
+                    <img src="icons/css.png" alt="CSS" onmouseover="showImage('img/css.png')" onmouseout="hideImage()">
+                    <img src="icons/js.png" alt="JavaScript" onmouseover="showImage('img/javascript.png')" onmouseout="hideImage()">
+                    <img src="icons/python.webp" alt="Python" onmouseover="showImage('img/python.png')" onmouseout="hideImage()">
+                    <img src="icons/Wireshark.png" alt="wireshark" onmouseover="showImage('img/java.png')" onmouseout="hideImage()">
+                    <img src="icons/nmap.png" alt="nmap" onmouseover="showImage('img/go.png')" onmouseout="hideImage()">
+                    <img src="icons/sql.png" alt="SQL" onmouseover="showImage('img/wireshark.png')" onmouseout="hideImage()">
+                    <img src="icons/packet_tracer.webp" alt="packet_tracer" onmouseover="showImage('img/packet_tracer.png')" onmouseout="hideImage()">
+                </div>
+                <div class="iconos_skills">
+                    <h4>Frameworks & library</h4>
+                    <img src="icons/keras.png" alt="keras" onmouseover="showImage('img/django.png')" onmouseout="hideImage()">
+                    <img src="icons/numpy.png" alt="numpy" onmouseover="showImage('img/flask.png')" onmouseout="hideImage()">
+                    <img src="icons/pandas.png" alt="pandas" onmouseover="showImage('img/react.png')" onmouseout="hideImage()">
+                    <img src="icons/pytorch.png" alt="pytorch" onmouseover="showImage('img/angular.png')" onmouseout="hideImage()">
+                    <img src="icons/tensorflow.png" alt="tensorflow" onmouseover="showImage('img/vue.png')" onmouseout="hideImage()">
+                    <img src="icons/Bootstrap.png" alt="boostrap" onmouseover="showImage('img/vue.png')" onmouseout="hideImage()">
+                    <img src="icons/scapy.webp" alt="scapi" onmouseover="showImage('img/django.png')" onmouseout="hideImage()">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showImage(imagePath) {
+        const previewImage = document.getElementById('previewImage');
+        const placeholderText = document.querySelector('.placeholder_text');
+        
+        previewImage.style.backgroundImage = `url('${imagePath}')`;
+        previewImage.classList.add('show');
+        placeholderText.classList.add('hide');
+    }
+    
+    function hideImage() {
+        const previewImage = document.getElementById('previewImage');
+        const placeholderText = document.querySelector('.placeholder_text');
+        
+        previewImage.classList.remove('show');
+        placeholderText.classList.remove('hide');
+    }
+</script>
+</body>
+</html>

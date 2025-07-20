@@ -1,0 +1,422 @@
+/* --- ESTILOS CSS MEJORADOS PARA MÓVILES --- */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+
+:root {
+    --background-color: #0d1117;
+    --terminal-color: #161b22;
+    --text-color: #c9d1d9;
+    --command-color: #58a6ff;
+    --output-color: #39d353;
+    --font-family: 'Fira Code', monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: linear-gradient(to bottom, var(--background-color), var(--output-color));
+    color: var(--text-color);
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 10px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.terminal {
+    width: 100%;
+    max-width: 1400px;
+    min-height: 90vh;
+    background-color: var(--terminal-color);
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    font-size: 1.1em;
+    overflow-y: auto;
+}
+
+.terminal-header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #30363d;
+    margin-bottom: 20px;
+}
+
+.button {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+.red { background-color: #ff5f56; }
+.yellow { background-color: #ffbd2e; }
+.green { background-color: #27c93f; }
+
+.line {
+    display: flex;
+    align-items: center;
+    white-space: pre-wrap;
+}
+
+.prompt {
+    color: var(--command-color);
+    font-weight: bold;
+}
+
+.prompt span {
+    color: var(--text-color);
+    font-weight: normal;
+}
+
+.command {
+    margin-left: 8px;
+}
+
+/* Animación del cursor que parpadea */
+.cursor {
+    display: inline-block;
+    background-color: var(--text-color);
+    width: 10px;
+    height: 1.2em;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    from, to { background-color: transparent; }
+    50% { background-color: var(--text-color); }
+}
+
+.output {
+    margin-top: 15px;
+    color: var(--output-color);
+    opacity: 0;
+}
+
+.visible {
+    opacity: 1;
+}
+
+a {
+    color: var(--output-color);
+    text-decoration: none;
+}
+
+/* Estilos para la barra de navegación */
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #30363d;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.navbar a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 1.1em;
+    white-space: nowrap;
+    min-width: fit-content;
+}
+
+.navbar a:hover {
+    color: var(--command-color);
+}
+
+.navbar a.active {
+    color: var(--output-color);
+    font-weight: bold;
+}
+
+/* Estilos para el área de contenido */
+.content {
+    padding-left: 10px;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+}
+
+.content h3 {
+    color: var(--command-color);
+    font-size: 1.3em;
+}
+
+.content h3::before {
+    content: '$ ';
+    color: var(--output-color);
+}
+
+.content p {
+    line-height: 1.7;
+    text-align: justify;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.content p a {
+    color: var(--command-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Estilos para el contenedor principal de skills */
+.photo_skills {
+    display: flex;
+    height: auto;
+    min-height: 400px;
+    margin-top: 20px;
+    gap: 40px;
+}
+
+/* Lado izquierdo - área de visualización de imágenes */
+.image_display {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #30363d;
+    border-radius: 12px;
+    background-color: rgba(22, 27, 34, 0.5);
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+}
+
+.preview_image {
+    width: 100%;
+    max-width: 800px;
+    height: 300px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    border: 2px solid var(--command-color);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.preview_image.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.placeholder_text {
+    color: #6e7681;
+    font-size: 1.1em;
+    text-align: center;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+}
+
+.placeholder_text.hide {
+    opacity: 0;
+}
+
+/* Lado derecho - iconos de skills */
+.skills_container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    overflow-y: auto;
+    max-height: 500px;
+    padding-right: 10px;
+}
+
+/* Personalizar scrollbar para webkit browsers */
+.skills_container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.skills_container::-webkit-scrollbar-track {
+    background: var(--terminal-color);
+    border-radius: 3px;
+}
+
+.skills_container::-webkit-scrollbar-thumb {
+    background: var(--command-color);
+    border-radius: 3px;
+}
+
+.skills_container::-webkit-scrollbar-thumb:hover {
+    background: var(--output-color);
+}
+
+.iconos_skills {
+    position: relative;
+}
+
+.iconos_skills h4 {
+    color: var(--command-color);
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.iconos_skills img {
+    width: 50px;
+    height: 50px;
+    margin: 10px 15px 10px 0;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.iconos_skills img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 8px 25px rgba(88, 166, 255, 0.4);
+}
+
+/* MEDIA QUERIES PARA MÓVILES */
+@media (max-width: 768px) {
+    body {
+        padding: 5px;
+        align-items: flex-start;
+    }
+    
+    .terminal {
+        width: 100%;
+        max-width: none;
+        min-height: 100vh;
+        padding: 15px;
+        font-size: 1em;
+        border-radius: 0;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .navbar {
+        gap: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        scrollbar-width: thin;
+    }
+    
+    .navbar a {
+        font-size: 0.95em;
+        padding: 5px 8px;
+        border-radius: 4px;
+        background-color: rgba(48, 54, 61, 0.3);
+    }
+    
+    .content {
+        padding-left: 5px;
+        max-height: none;
+        overflow-y: visible;
+    }
+    
+    .content h3 {
+        font-size: 1.1em;
+        margin-bottom: 15px;
+    }
+    
+    .photo_skills {
+        flex-direction: column;
+        height: auto;
+        min-height: auto;
+        gap: 20px;
+    }
+    
+    .image_display {
+        order: 2;
+        min-height: 200px;
+        margin-top: 20px;
+    }
+    
+    .preview_image {
+        height: 200px;
+        background-size: contain;
+    }
+    
+    .skills_container {
+        order: 1;
+        max-height: none;
+        overflow-y: visible;
+        padding-right: 0;
+    }
+    
+    .iconos_skills {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .iconos_skills h4 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        text-align: left;
+    }
+    
+    .iconos_skills img {
+        width: 45px;
+        height: 45px;
+        margin: 8px 12px 8px 0;
+    }
+    
+    /* Para móviles muy pequeños */
+    @media (max-width: 480px) {
+        .terminal {
+            padding: 15px;
+            font-size: 0.9em;
+        }
+        
+        .navbar a {
+            font-size: 0.85em;
+            padding: 4px 6px;
+        }
+        
+        .content h3 {
+            font-size: 1em;
+        }
+        
+        .iconos_skills img {
+            width: 40px;
+            height: 40px;
+            margin: 6px 10px 6px 0;
+        }
+        
+        .photo_skills {
+            gap: 15px;
+        }
+        
+        .image_display {
+            min-height: 150px;
+        }
+        
+        .preview_image {
+            height: 150px;
+        }
+    }
+}
+
+/* Mejoras para accesibilidad en móviles */
+@media (hover: none) and (pointer: coarse) {
+    .iconos_skills img:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .iconos_skills img:active {
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(88, 166, 255, 0.3);
+    }
+}
+
+/* Scrollbar personalizado para Firefox */
+.skills_container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--command-color) var(--terminal-color);
+}
+
+.terminal {
+    scrollbar-width: thin;
+    scrollbar-color: var(--command-color) var(--terminal-color);
+}

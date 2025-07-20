@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio - Ever Junior Leiva Arias</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="terminal">
+        <div class="terminal-header">
+            <div class="button red"></div>
+            <div class="button yellow"></div>
+            <div class="button green"></div>
+        </div>
+
+        <div class="line">
+            <div class="prompt">>>root@portfolio: <span>~$&nbsp;</span></div>
+            <div id="command" class="command"></div>
+            <div id="cursor" class="cursor"></div>
+        </div>
+        <div id="output" class="output">
+            Ever Junior Leiva Arias
+        </div>
+
+        <div id="second-command-line" style="display: none;">
+            <div class="line">
+                <div class="prompt">>>root@portfolio: <span>~$&nbsp;</span></div>
+                <div id="command2" class="command"></div>
+                <div id="cursor2" class="cursor"></div>
+            </div>
+            <div id="output2" class="output">
+                <a href="aboutme.html">aboutme.html</a>
+                <a href="project.html">skill.css</a>
+                <a href="project.html">project.py</a>
+                <a href="contact.html">contact.txt</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Elementos del primer comando ---
+            const commandElement = document.getElementById('command');
+            const cursorElement = document.getElementById('cursor');
+            const outputElement = document.getElementById('output');
+            
+            // --- Elementos del segundo comando ---
+            const secondCommandLine = document.getElementById('second-command-line');
+            const commandElement2 = document.getElementById('command2');
+            const cursorElement2 = document.getElementById('cursor2');
+            const outputElement2 = document.getElementById('output2');
+
+            const commandText1 = "whoami";
+            const commandText2 = "ls";
+            let index1 = 0;
+            let index2 = 0;
+
+            // --- Lógica para el primer comando: "whoami" ---
+            function typeCommand1() {
+                if (index1 < commandText1.length) {
+                    commandElement.textContent += commandText1.charAt(index1);
+                    index1++;
+                    setTimeout(typeCommand1, Math.random() * 150 + 50);
+                } else {
+                    cursorElement.style.animation = 'blink 1s step-end infinite';
+                    setTimeout(showOutput1, 1500); // Muestra el resultado después de 1.5s
+                }
+            }
+
+            function showOutput1() {
+                outputElement.classList.add('visible'); // Muestra el nombre
+                cursorElement.style.display = 'none'; // Oculta el primer cursor
+                secondCommandLine.style.display = 'block'; // Muestra la segunda línea de comandos
+                
+                // Inicia la animación del segundo comando
+                typeCommand2();
+            }
+
+            // --- Lógica para el segundo comando: "ls" ---
+            function typeCommand2() {
+                if (index2 < commandText2.length) {
+                    commandElement2.textContent += commandText2.charAt(index2);
+                    index2++;
+                    setTimeout(typeCommand2, Math.random() * 200 + 70);
+                } else {
+                    cursorElement2.style.animation = 'blink 1s step-end infinite';
+                    setTimeout(showOutput2, 1500); // Muestra el resultado después de 1.5s
+                }
+            }
+            
+            function showOutput2() {
+                outputElement2.classList.add('visible'); // Muestra los enlaces
+                cursorElement2.style.display = 'none'; // Oculta el segundo cursor
+            }
+
+            // Inicia todo el proceso
+            typeCommand1();
+        });
+    </script>
+
+</body>
+</html>
